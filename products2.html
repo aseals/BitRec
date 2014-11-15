@@ -71,8 +71,8 @@ left: 320px;
 width: 200px;
 ">
 
-                    <div  class="done">       <a href="products.html" type="submit" data-loading-text="Loading" class="btn btn-primary btn-block" style="margin-top: 20px;
-margin-left: 50px;">Done</a>
+                    <div  class="done">       <button type="submit" data-loading-text="Loading" class="btn btn-primary btn-block" style="margin-top: 20px;
+margin-left: 50px;">Confirmed</button>
                 </div>
 </div>
 
@@ -103,6 +103,7 @@ function qr(input) {
           //   render  : "table",
           //   text  : input
           // });
+console.log(input);
     link = 'http://www.btcfrog.com/qr/bitcoinPNG.php?address='+input;
     console.log(link);
         // $('#qrcodeTable').html( '<img style="-webkit-user-select: none" src='+ link + '>');
@@ -119,9 +120,10 @@ function qr(input) {
 
 function transaction_check(input_addr, timemax, btn) {
 
-    var api_key_id = 'DEMO-4a5e1e4';
+    var api_key_id = '3c0c177a5a93272653e1a09d8e66dc1e';
     var address = input_addr ;
-    var url = 'https://api.chain.com/v2/bitcoin/addresses/' + address + '/transactions';
+
+    var url = 'https://api.chain.com/v2/bitcoin/addresses/' + address + '';
     timemax = timemax +1;
     $.ajax({
       url: url,
@@ -129,15 +131,22 @@ function transaction_check(input_addr, timemax, btn) {
       type: 'GET',
       success: function(data) {
         // console.log(data)
+        console.log(data);
         if (timemax <= 2000){
-          if ( data.length == 0 ) {
+          if ( data[0].total.received == 0 ) {
               console.log("Transaction not done yet");
               setTimeout(transaction_check (input_addr, timemax, btn), 3000);
                }
-          else if(data.length > 0)
+          else if(data[0].total.received > 0)
                 { console.log('Transaction is confirmed');
                   //button confirmed
-                  $(btn).parent().append('<p>Confirmed</p>');
+                  if ($('.alert').length != 0) {
+                    $('.alert').remove();
+                  }
+                  $(btn).parent().append('<div class="alert alert-success" style="margin-top: 10px; width: 300px;"role="alert">\
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-\
+only">Close</span></button>\
+  <strong>Confirmed Transaction! '+data[0].total.received/100000000+' BTC</strong></div>');
                   $(btn).button('reset');
 
           }
@@ -148,7 +157,14 @@ function transaction_check(input_addr, timemax, btn) {
          }
          else {
           // Not confirmed
-          $(btn).parent().prepend('<p>Failed</p>');
+          if ($('.alert').length != 0) {
+
+            $('.alert').remove();
+        }
+        $(btn).parent().append('<div class="alert alert-danger" style="margin-top: 10px; width: 300px;"role="alert">\
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-\
+only">Close</span></button>\
+  <strong>Failed Transaction! Try Again!</strong></div>');
           $(btn).button('reset');
 
 
