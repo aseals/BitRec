@@ -183,7 +183,6 @@ li a {
 }
 
 #items .item-content .total::before {
-  content: "$"
 }
 
 #items .editNav {

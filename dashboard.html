@@ -46,7 +46,7 @@
                     <div class="navbar-collapse collapse">
                       <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="loadingpage.html">Analytics</a></li>
+                        <li><a href="VIZtabs.html">Analytics</a></li>
                         <!-- <li><a href="sellMyData.html">Sell My Data</a></li> -->
         <!--                 {% if user.is_authenticated %}
                         <li><a href="{% url 'accounts:profile' user  %}">My Account</a></li>
@@ -162,9 +162,9 @@
                     <div class="description">
                       <h3 class="merchant"><%- Merchant %></h3>
                         <% _.each(Items, function(item) { %>
-                            <div id="itemized_pin"><span style=""><%- item.title %>:</span> <span style="float:right"> $<%- twoDigit(item.price) %></span></div>
+                            <div id="itemized_pin"><span style=""><%- item.title %>:</span> <span style="float:right"> <img src="image/bitcoin.png"><%- twoDigit(item.price) %></span></div>
                         <% }) %>
-                        Total Price: <p class="total" style="float:right;display: inline;"><%- twoDigit(Total) %></p>
+                        Total Price: <p class="total" style="float:right;display: inline;"><img src="image/bitcoin.png"><%- twoDigit(Total) %></p>
 
                     </div>
 
