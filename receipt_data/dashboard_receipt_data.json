@@ -2,8 +2,6 @@
     {
         "receipt_id": 1,
         "timestamp": "Oct.10,2014 10:39a.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "VISA",
         "Merchant": "Target",
         "Address": "524 E. 15th St",
         "City": "NY",
@@ -26,8 +24,6 @@
     {
         "receipt_id": 2,
         "timestamp": "Oct.10,2014 11:41a.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "Mastercard",
         "Merchant": "Fairways",
         "Address": "555 W. 42nd St",
         "City": "NY",
@@ -50,8 +46,6 @@
     {
         "receipt_id": 3,
         "timestamp": "Oct.10,2014 12:39p.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "VISA",
         "Merchant": "Fairways",
         "Address": "555 W. 42nd St",
         "City": "NY",
@@ -64,7 +58,7 @@
             },
             {
                 "title": "Gravy",
-                "price": 12.99
+                "price": 2.99
 
             }],
         "Subtotal": 39.99,
@@ -73,9 +67,7 @@
     },
     {
         "receipt_id": 4,
-        "timestamp": "Oct.11,2014 13:24p.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "VISA",
+        "timestamp": "Oct.17,2014 13:24p.m.",
         "Merchant": "Bob's Breads",
         "Address": "555 W. 137th St",
         "City": "NY",
@@ -84,17 +76,15 @@
         "tag": "food",
         "Items": [{
                 "title": "Turkey BLT",
-                "price": 12.00
+                "price": 20.00
             }],
-        "Subtotal": 12.00,
+        "Subtotal": 20.00,
         "Tax": 1.09,
-        "Total": 13.09
+        "Total": 21.09
     },
     {
         "receipt_id": 5,
         "timestamp": "Oct.11,2014 15:22p.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "VISA",
         "Merchant": "ABC Bananas",
         "Address": "555 E. 3rd St",
         "City": "NY",
@@ -117,8 +107,6 @@
     {
         "receipt_id": 6,
         "timestamp": "Oct.11,2014 17:34p.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "AMEX",
         "Merchant": "APC",
         "Address": "92 W. 3rd St",
         "City": "NY",
@@ -127,22 +115,20 @@
         "tag": "clothing",
         "Items": [{
                 "title": "Hat",
-                "price": 540.00
+                "price": 54.00
             },
             {
                 "title": "Raw Denim",
-                "price": 370.00
+                "price": 37.00
 
             }],
-        "Subtotal": 910.00,
-        "Tax": 100.00,
-        "Total": 1010.00
+        "Subtotal": 91.00,
+        "Tax": 10.00,
+        "Total": 101.00
     },
     {
         "receipt_id": 7,
         "timestamp": "Oct.11,2014 18:19p.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "Mastercard",
         "Merchant": "Walmart",
         "Address": "555 W. 42nd St",
         "City": "NY",
@@ -165,44 +151,23 @@
     {
         "receipt_id": 8,
         "timestamp": "Oct.12,2014 12:24a.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "VISA",
-        "Merchant": "Fintech Hackathon",
-        "Address": "111 8th Ave",
+        "Merchant": "New York Casino",
+        "Address": "91 10th Ave",
         "City": "NY",
         "State": "NY",
         "zip": "10009",
         "tag": "food",
         "Items": [{
-                "title": "Lasagna",
-                "price": 2000.00
+                "title": "Drinks",
+                "price": 50.00
             },
             {
-                "title": "Everything Else",
-                "price": 7000.00
+                "title": "Miscellaneous",
+                "price": 45.00
 
             }],
-        "Subtotal": 9000.00,
-        "Tax": 0.00,
-        "Total": 9000.00
-    },
-    {
-        "receipt_id": 9,
-        "timestamp": "Oct.12,2014 01:24a.m.",
-        "cardNum": "XXXX-XXXX-XXXX",
-        "cardType": "Mastercard",
-        "Merchant": "Fintech Hackathon",
-        "Address": "111 8th Ave.",
-        "City": "NY",
-        "State": "NY",
-        "zip": "10678",
-        "tag": "sleep",
-        "Items": [{
-                "title": "Sleep",
-                "price": 0.00
-            }],
-        "Subtotal": 0.00,
-        "Tax": 0.00,
-        "Total": 0.00
+        "Subtotal": 95.00,
+        "Tax": 3.00,
+        "Total": 98.00
     }
 ]

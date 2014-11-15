@@ -37,15 +37,17 @@
                         <span class="icon-bar"></span>
                       </button>
 
-                    <a class="navbar-brand" id="logo" href="">
-                      <img src="./image/logo-small.png" alt="Home">
-                    </a>
+                   <a class="navbar-brand" id="logo" href="">
+          <img src="./image/bitreclogo.png" alt="Home" style="
+             width: 150px;
+             padding-top: 4px;
+              ">
                     </div>
                     <div class="navbar-collapse collapse">
                       <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="loadingpage.html">Analytics</a></li>
-                        <li><a href="sellMyData.html">Sell My Data</a></li>
+                        <!-- <li><a href="sellMyData.html">Sell My Data</a></li> -->
         <!--                 {% if user.is_authenticated %}
                         <li><a href="{% url 'accounts:profile' user  %}">My Account</a></li>
                         {% endif %} -->
@@ -81,9 +83,9 @@
                           </ul>
                         </li> -->
                       <!--   {% endif %} -->
-
+<!-- 
                         <li class="dropdown navbar-right">
-                          <ul class="nav navbar-nav">
+                          <ul class="nav navbar-nav"> -->
                           <!-- {% if not user.is_authenticated %} -->
 
                             
@@ -91,16 +93,17 @@
         <!--                     {% else %}
          -->                    
                             <li class="dropdown navbar-right">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!-- {{ user.username }} -->Baruch <b class="caret"></b></a>
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <!-- {{ user.username }} --> Baruch <b class="caret"> </b></a>
                               <ul class="dropdown-menu">
                                 <!-- Button trigger modal -->
-                                <li><a href="account.html">My account</a></li>
+                                <!-- <li><a href="account.html">My account</a></li> -->
                                 <li><a href="settings.html">Settings</a></li>
                                 <li><a href="index.html">Sign out</a></li>
                               </ul>
                             </li>
 
-
+<!-- 
                             <li class="dropdown navbar-right">
                               <a href="#" class="dropdown-toggle glyphicon glyphicon-plus" style="font-size:24px;" data-toggle="dropdown"></a>
                               <ul class="dropdown-menu">
@@ -108,7 +111,7 @@
                                 <li><a id="createBasketButton" data-target="#createBasketModal">Set Spending Goals</a></li>
  
                               </ul>
-                            </li>
+                            </li> -->
                             <!-- <li><a href="">Sign out</a></li> -->
                          <!--    {% endif%} -->
                           </ul>
@@ -126,9 +129,9 @@
         <div class="container" id="receiptContainer">
             <div id="sorts" class="btn-group">  
         <button class="btn btn-default active" data-sort-by="original-order">Date</button>
-          <button class="btn btn-default" data-sort-by="merchant">Merchant</button>
+          <!-- <button class="btn btn-default" data-sort-by="merchant">Merchant</button> -->
           <button class="btn btn-default" data-sort-by="total">Price</button>
-          <button class="btn btn-default" data-sort-by="cardType">Card Type</button>
+          <!-- <button class="btn btn-default" data-sort-by="cardType">Card Type</button> -->
         </div>
         <button id="receiptSortType" class="btn btn-primary" style="float:right; margin-right:40px"><span class="glyphicon glyphicon-chevron-up">Ascending Order</span></button>
         <button href="javascript:;" onclick="recommendations()" id="recommendationButton" class="btn btn-warning" style="float:right; margin-right:40px"><span class="glyphicon glyphicon glyphicon-th-list">Recommendations</span></button>
@@ -168,10 +171,9 @@
                     <div class="meta">
                         <i class="glyphicon glyphicon-calendar"></i> <span class="date"><%- timestamp %></span>
                         <br>
-                        <i class="glyphicon glyphicon-user"></i> Baruch
+                        <i class="glyphicon glyphicon-user"></i>  
                         <br>
-                        <i class="glyphicon glyphicon-tag"></i> <%- tag %> &nbsp;
-                        <i class="glyphicon glyphicon glyphicon-credit-card "></i> <span class="cardType"> <%- cardType %></span>
+
 
 
                     </div>
