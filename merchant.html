@@ -7,13 +7,15 @@
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="card/lib/css/card.css">
     <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
     <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="src/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="src/jquery.qrcode.js"></script>
+    <script type="text/javascript" src="src/qrcode.js"></script>
   </head>
   <body>
 <div class="navbar navbar-fixed-top" role="navigation">
@@ -79,7 +81,7 @@
         <!--                     {% else %}
          -->                    
                             <li class="dropdown navbar-right">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!-- {{ user.username }} -->Baruch <b class="caret"></b></a>
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!-- {{ user.username }} -->18R3xvbF71kxAmpzmZWLaQeBVK22E51qtE <b class="caret"></b></a>
                               <ul class="dropdown-menu">
                                 <!-- Button trigger modal -->
                                 <li><a href="account.html">My account</a></li>
@@ -89,14 +91,7 @@
                             </li>
 
 
-                            <li class="dropdown navbar-right">
-
-                              <ul class="dropdown-menu">
-                                <li><a id="createCorkButton" data-target="#createCorkModal">Add a Card</a></li>
-                                <li><a id="createBasketButton" data-target="#createBasketModal">Set Spending Goals</a></li>
- 
-                              </ul>
-                            </li>
+  
                             <!-- <li><a href="">Sign out</a></li> -->
                          <!--    {% endif%} -->
                           </ul>
@@ -112,22 +107,162 @@
                 </div>
 <section id="main">
     <div class="row showcase">
-      
+            <button type="submit" class="btn btn-danger btn-block" style="width: inherit">Done</button>
+
+      <div id="qrcodeTable"></div>
+
+
     </div>
 
-    <div class="row desc">
+    <div>
       <br>
-      
     </div>
 </section>
 
+<script>
+$(document).ready(function() {
+   var addr = '16bM5gBfagBTLJ6HD8Lw4RsbbF61pmRPuB';
+    var url = 'https://blockchain.info/api/receive?method=create&address=16bM5gBfagBTLJ6HD8Lw4RsbbF61pmRPuB&callback=';
+    $.ajax({
+      url: url,
+
+      success: function(data) {
+        input_addr = data.input_address;
+        // console.log(input_addr);
+        qr(input_addr);
+        
+      }
+    });
+
+  $('.btn-danger').click(function() {
+    transaction_check(input_addr, 0) ;
+  })
+
+function qr(input) {
+          // $('#qrcodeTable').qrcode({
+          //   render  : "table",
+          //   text  : input
+          // });
+    $.ajax({
+      url: "https://blockchain.info/qr?size=300&data="+input+'&callback=?',
+      type: 'GET',
+      success: function(data) {
+        console.log(data.responseText);
+        $('#qrcodeTable').html( data.responseText);
+        
+      }
+    });
+
+    
+}
+
+
+})
+
+
+
+
+function transaction_check(input_addr, timemax) {
+    var api_key_id = 'DEMO-4a5e1e4';
+    var address = input_addr ;
+    var url = 'https://api.chain.com/v2/bitcoin/addresses/' + address + '/transactions';
+    timemax = timemax +1;
+    $.ajax({
+      url: url,
+      data: {limit: 2, 'api-key-id': api_key_id},
+      type: 'GET',
+      success: function(data) {
+        // console.log(data)
+
+        if (timemax <= 500){
+        if ( data.length == 0 ) {
+        console.log("Transaction not done yet");
+        setTimeout(transaction_check (input_addr, timemax), 3000);
+         }
+        else if(data[0].confirmations > 0)
+          { console.log('Transaction is confirmed');}
+        else { console.log('Transaction not confirmed. Please reload'); 
+               setTimeout(transaction_check (input_addr, timemax), 2000);
+              }
+         }     
+      }
+    });
+  }
+   
+
+jQuery.ajax = (function(_ajax){
+    
+    var protocol = location.protocol,
+        hostname = location.hostname,
+        exRegex = RegExp(protocol + '//' + hostname),
+        YQL = 'http' + (/^https/.test(protocol)?'s':'') + '://query.yahooapis.com/v1/public/yql?callback=?',
+        query = 'select * from html where url="{URL}" and xpath="*"';
+    
+    function isExternal(url) {
+        return !exRegex.test(url) && /:\/\//.test(url);
+    }
+    
+    return function(o) {
+        
+        var url = o.url;
+        
+        if ( /get/i.test(o.type) && !/json/i.test(o.dataType) && isExternal(url) ) {
+            
+            // Manipulate options so that JSONP-x request is made to YQL
+            
+            o.url = YQL;
+            o.dataType = 'json';
+            
+            o.data = {
+                q: query.replace(
+                    '{URL}',
+                    url + (o.data ?
+                        (/\?/.test(url) ? '&' : '?') + jQuery.param(o.data)
+                    : '')
+                ),
+                format: 'xml'
+            };
+            
+            // Since it's a JSONP request
+            // complete === success
+            if (!o.success && o.complete) {
+                o.success = o.complete;
+                delete o.complete;
+            }
+            
+            o.success = (function(_success){
+                return function(data) {
+                    
+                    if (_success) {
+                        // Fake XHR callback.
+                        _success.call(this, {
+                            responseText: (data.results[0] || '')
+                                // YQL screws with <script>s
+                                // Get rid of them
+                                .replace(/<script[^>]+?\/>|<script(.|\s)*?\/script>/gi, '')
+                        }, 'success');
+                    }
+                    
+                };
+            })(o.success);
+            
+        }
+        
+        return _ajax.apply(this, arguments);
+        
+    };
+    
+})(jQuery.ajax);
+
+
+
+</script>
+
+
 
   <!-- script references -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/homepage.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="card/lib/js/card.js"></script>
   </body>
 </html>

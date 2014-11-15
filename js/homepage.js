@@ -1,7 +1,5 @@
 $(document).ready(function(){/* activate scrollspy menu */
-$('.active form').card({
-  container: $('.card-wrapper')
-})
+
 
 $(".openpanel").on("click", function() {
     $("#panel1").collapse('show');

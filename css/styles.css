@@ -51,9 +51,9 @@ a.list-group-item.active,[class*='-info'] {
 }
 
 .showcase {
-  background: #79BD8F url('../image/backgroundm.png') repeat;
+  background: #79BD8F url('../image/main.jpg') repeat;
   background-size: 100%;
-  height: 580px;
+  height: 550px;
   padding: 40px 0 20px;
   color: white;
 }
@@ -152,4 +152,11 @@ a.list-group-item.active,[class*='-info'] {
 }
 .card-related {
   margin-bottom: 20px;
+}
+
+
+
+#qrcodeTable {
+  margin-left: 240px;
+  
 }
