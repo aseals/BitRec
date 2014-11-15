@@ -24,10 +24,10 @@ html, body {
 .navbar-trans li>a:hover,.navbar-trans li>a:focus,.navbar-trans li.active {
   background-color:#38afef;
 }
-
+/*
 .navbar-trans a{
     color:#fefefe;
-}
+}*/
 
 .navbar-trans .form-control:focus {
   border-color: #eee;
