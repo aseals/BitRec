@@ -28,9 +28,11 @@
                         <span class="icon-bar"></span>
                       </button>
 
-                    <a class="navbar-brand" id="logo" href="">
-                      <img src="./image/logo-small.png" alt="Home">
-                    </a>
+                   <a class="navbar-brand" id="logo" href="">
+          <img src="./image/bitreclogo.png" alt="Home" style="
+    width: 150px;
+    padding-top: 4px;
+">
                     </div>
                     <div class="navbar-collapse collapse">
                       <ul class="nav navbar-nav">
@@ -107,10 +109,18 @@
                 </div>
 <section id="main">
     <div class="row showcase">
-            <button type="submit" class="btn btn-danger btn-block" style="width: inherit">Done</button>
+           
 
-      <div id="qrcodeTable"></div>
-
+      <div id="qrcodeTable" style="float: left">
+</div>
+    <div style="float: right" class="done">       <button type="submit" data-loading-text="Loading" class="btn btn-primary btn-block" style="margin-right: 250px;width: 250px;
+height: 200px;
+margin-right: 250px;
+margin-top: 60px; font-size: 4em;
+font-family: fantasy;
+white-space: pre-wrap;
+border-radius: 10px">Done</button>
+</div>
 
     </div>
 
@@ -134,8 +144,10 @@ $(document).ready(function() {
       }
     });
 
-  $('.btn-danger').click(function() {
-    transaction_check(input_addr, 0) ;
+  $('.btn-primary').click(function() {
+    btn = $(this);
+    $(this).button('loading');
+    transaction_check(input_addr, 0, btn) ;
   })
 
 function qr(input) {
@@ -143,16 +155,11 @@ function qr(input) {
           //   render  : "table",
           //   text  : input
           // });
-    $.ajax({
-      url: "https://blockchain.info/qr?size=300&data="+input+'&callback=?',
-      type: 'GET',
-      success: function(data) {
-        console.log(data.responseText);
-        $('#qrcodeTable').html( data.responseText);
-        
-      }
-    });
-
+    link = 'http://www.btcfrog.com/qr/bitcoinPNG.php?address='+input;
+    console.log(link);
+        // $('#qrcodeTable').html( '<img style="-webkit-user-select: none" src='+ link + '>');
+        $('#qrcodeTable').prepend('<div><div><div><img alt="Incorrect QR code input" src='+ link+ '&error=M" style="height: 300px;width \
+          300px" /></div><div></div></div></div>');
     
 }
 
@@ -162,7 +169,8 @@ function qr(input) {
 
 
 
-function transaction_check(input_addr, timemax) {
+function transaction_check(input_addr, timemax, btn) {
+
     var api_key_id = 'DEMO-4a5e1e4';
     var address = input_addr ;
     var url = 'https://api.chain.com/v2/bitcoin/addresses/' + address + '/transactions';
@@ -173,86 +181,37 @@ function transaction_check(input_addr, timemax) {
       type: 'GET',
       success: function(data) {
         // console.log(data)
+        if (timemax <= 2000){
+          if ( data.length == 0 ) {
+              console.log("Transaction not done yet");
+              setTimeout(transaction_check (input_addr, timemax, btn), 3000);
+               }
+          else if(data.length > 0)
+                { console.log('Transaction is confirmed');
+                  //button confirmed
+                  $(btn).parent().append('<p>Confirmed</p>');
+                  $(btn).button('reset');
 
-        if (timemax <= 500){
-        if ( data.length == 0 ) {
-        console.log("Transaction not done yet");
-        setTimeout(transaction_check (input_addr, timemax), 3000);
+          }
+          else { console.log('Transaction not confirmed. Please reload'); 
+                     setTimeout(transaction_check (input_addr, timemax, btn), 2000);
+
+                    }
          }
-        else if(data[0].confirmations > 0)
-          { console.log('Transaction is confirmed');}
-        else { console.log('Transaction not confirmed. Please reload'); 
-               setTimeout(transaction_check (input_addr, timemax), 2000);
-              }
+         else {
+          // Not confirmed
+          $(btn).parent().prepend('<p>Failed</p>');
+          $(btn).button('reset');
+
+
+
+
          }     
       }
     });
   }
    
 
-jQuery.ajax = (function(_ajax){
-    
-    var protocol = location.protocol,
-        hostname = location.hostname,
-        exRegex = RegExp(protocol + '//' + hostname),
-        YQL = 'http' + (/^https/.test(protocol)?'s':'') + '://query.yahooapis.com/v1/public/yql?callback=?',
-        query = 'select * from html where url="{URL}" and xpath="*"';
-    
-    function isExternal(url) {
-        return !exRegex.test(url) && /:\/\//.test(url);
-    }
-    
-    return function(o) {
-        
-        var url = o.url;
-        
-        if ( /get/i.test(o.type) && !/json/i.test(o.dataType) && isExternal(url) ) {
-            
-            // Manipulate options so that JSONP-x request is made to YQL
-            
-            o.url = YQL;
-            o.dataType = 'json';
-            
-            o.data = {
-                q: query.replace(
-                    '{URL}',
-                    url + (o.data ?
-                        (/\?/.test(url) ? '&' : '?') + jQuery.param(o.data)
-                    : '')
-                ),
-                format: 'xml'
-            };
-            
-            // Since it's a JSONP request
-            // complete === success
-            if (!o.success && o.complete) {
-                o.success = o.complete;
-                delete o.complete;
-            }
-            
-            o.success = (function(_success){
-                return function(data) {
-                    
-                    if (_success) {
-                        // Fake XHR callback.
-                        _success.call(this, {
-                            responseText: (data.results[0] || '')
-                                // YQL screws with <script>s
-                                // Get rid of them
-                                .replace(/<script[^>]+?\/>|<script(.|\s)*?\/script>/gi, '')
-                        }, 'success');
-                    }
-                    
-                };
-            })(o.success);
-            
-        }
-        
-        return _ajax.apply(this, arguments);
-        
-    };
-    
-})(jQuery.ajax);
 
 
 
