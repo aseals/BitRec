@@ -51,9 +51,13 @@ a.list-group-item.active,[class*='-info'] {
 }
 
 .showcase {
+<<<<<<< HEAD
   background: url('../image/background3.jpg') repeat;
+=======
+  background: #79BD8F url('../image/main.jpg') repeat;
+>>>>>>> d3a89159c01c164a779ff6c2150db004766899d9
   background-size: 100%;
-  height: 580px;
+  height: 550px;
   padding: 40px 0 20px;
   color: white;
 }
@@ -161,4 +165,9 @@ a.list-group-item.active,[class*='-info'] {
    height:30px;
    width:100%;
    background:#999;
+}
+
+#qrcodeTable {
+  margin-left: 240px;
+  
 }

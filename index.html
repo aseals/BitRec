@@ -14,6 +14,7 @@
     <![endif]-->
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
   </head>
   <body>
 <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
@@ -21,17 +22,44 @@
         <a class="navbar-brand" id="logo" href="">
           <img src="./image/bitreclogo.png" alt="Home" style="
     width: 150px;
-    padding-top: 5px;
-">
+    padding-top: 5px;">
+
         </a>
       </div>
       <ul class="nav navbar-nav navbar-right" style="margin-right:10px;">
+        <div class="dropdown">
+          <button class="btn btn-default navbar-btn btn-outline dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+            Buyer Log In
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+            <li>
+              <div class="row">
+                <div class="col-md-12">
+                  <form class="form" role="form" method="post" action="{% url 'accounts:login' %}" accept-charset="UTF-8" id="login-nav">
+                           <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail2">Username</label>
+                      <input type="text" name="username" class="form-control" id="exampleInputEmail2" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputPassword2">Password</label>
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                      <a type="submit" class="btn btn-success btn-block" href="dashboard.html">Sign in</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
         <li>&nbsp;</li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="margin-right:10px;">
         <li>
-        <button type="button" class="btn btn-default navbar-btn btn-outline" data-toggle="modal" data-target="#ticketmodal" >Buyer Sign up!</button>
-        <button type="button" class="btn btn-default navbar-btn btn-outline" data-toggle="modal" data-target="#merchantmodal" style="margin-right: 100px;" >Merchant Sign In</button>
+        <button type="button" class="btn btn-default navbar-btn btn-outline" data-toggle="modal" data-target="#ticketmodal" >Buyer</button>
+        <button type="button" class="btn btn-default navbar-btn btn-outline" data-toggle="modal" data-target="#merchantmodal" style="margin-right: 100px;" >Merchant</button>
         </li>
       </ul>
     </div>
@@ -64,7 +92,7 @@
                   <input class="MerchantID form-control" placeholder="Bitcoin Wallet ID" value="18R3xvbF71kxAmpzmZWLaQeBVK22E51qtE"type="text" name="merchantId">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Password" type="text" name="transactionID">
+                  <input class="form-control" placeholder="Password" type="password" name="transactionID">
                 </div>
 
               </form>
@@ -95,10 +123,10 @@
                   <input class="MerchantID form-control" placeholder="Bitcoin Wallet ID" value="18R3xvbF71kxAmpzmZWLaQeBVK22E51qtE"type="text" name="merchantId">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Password" type="text" name="transactionID">
+                  <input class="form-control" placeholder="Password" type="password" name="transactionID">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="Confirm Password" type="text" name="transactionID2">
+                  <input class="form-control" placeholder="Confirm Password" type="password" name="transactionID2">
                 </div>
 
               </form>
